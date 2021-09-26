@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  redis:
+    image: registry.gitlab.shiveh.com/upstream/redis:persist
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - $PWD/data:/data
+  redis_insight:
+    image: redislabs/redisinsight:latest
+    container_name: redis_insight
+    ports:
+      - "8001:8001"
+    depends_on:
+      - "redis"
